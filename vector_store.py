@@ -1,6 +1,6 @@
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 
 def create_vector_store(texts, embeddings):
     # create the vector store database

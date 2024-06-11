@@ -1,6 +1,6 @@
 import pdb
 
-#from langchain.document_loaders import DirectoryLoader, PyPDFLoader
+from langchain.document_loaders import DirectoryLoader, PyPDFLoader
 import os
 from langchain_community.document_loaders import ConfluenceLoader
 
@@ -23,12 +23,12 @@ def load_pdf_docs():
 def split_doc_txt(documents):
     splitter = RecursiveCharacterTextSplitter(chunk_size=500,
                                               chunk_overlap=50)
-    texts = splitter.split_documents(documents)
+    texts = splitter.split_documents(documents())
     return texts
 
 def load_embeddings(source):
     pdb.set_trace()
-    if source =='PDF':
+    if source =='pdf':
         documents = load_pdf_docs
     elif source == 'confluence':
         documents = load_confluence_docs()
@@ -41,5 +41,5 @@ def load_embeddings(source):
     print("hello")
 
 if __name__== "__main__":
-    source = "confluence"
+    source = "pdf"
     load_embeddings(source)
