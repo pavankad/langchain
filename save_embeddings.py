@@ -1,6 +1,6 @@
 import pdb
 
-from langchain.document_loaders import DirectoryLoader, PyPDFLoader
+from langchain.document_loaders import DirectoryLoader, PyPDFLoader, CSVLoader
 import os
 from langchain_community.document_loaders import ConfluenceLoader
 
@@ -13,6 +13,10 @@ def load_confluence_docs():
     documents = loader.load(space_key="TD", include_attachments=True, limit=50)
     return documents
 
+def load_csv_files():
+    loader = CSVLoader()
+    documents = loader.loadr()
+    return documents
 def load_pdf_docs():
     # load the pdf files
     loader = DirectoryLoader(path='/Users/pavan/docs', glob="*.pdf", loader_cls=PyPDFLoader)
@@ -23,15 +27,17 @@ def load_pdf_docs():
 def split_doc_txt(documents):
     splitter = RecursiveCharacterTextSplitter(chunk_size=500,
                                               chunk_overlap=50)
-    texts = splitter.split_documents(documents())
+    texts = splitter.split_documents(documents)
     return texts
 
 def load_embeddings(source):
     pdb.set_trace()
     if source =='pdf':
-        documents = load_pdf_docs
+        documents = load_pdf_docs()
     elif source == 'confluence':
         documents = load_confluence_docs()
+    elif source == 'csv':
+        document = load_csf_files()
     texts = split_doc_txt(documents)
     pdb.set_trace()
     embeddings = load_embeddings_model()
