@@ -44,7 +44,7 @@ def load_embeddings(source):
     db=create_vector_store(texts, embeddings)
     save_vector_store(db)
     pdb.set_trace()
-    print("hello")
+    print("hello1")
 
 if __name__== "__main__":
     source = "pdf"
